@@ -1,0 +1,24 @@
+PLINK v2.0.0-a.6.9 64-bit (29 Jan 2025)
+Options in effect:
+  --out results/chr22_pca
+  --pca 10
+  --pfile results/chr22_pruned
+
+Hostname: Timothys-MacBook-Pro.local
+Working directory: /Users/tim/bioinformatics-portfolio/01-african-genomics
+Start time: Wed Jun 17 21:45:36 2026
+
+Random number seed: 1781729136
+8192 MiB RAM detected; reserving 4096 MiB for main workspace.
+Using up to 8 compute threads.
+3202 samples (0 females, 0 males, 3202 ambiguous; 3202 founders) loaded from
+results/chr22_pruned.psam.
+5141 variants loaded from results/chr22_pruned.pvar.
+Note: No phenotype data present.
+Calculating allele frequencies... done.
+Constructing GRM: done.
+Extracting eigenvalues and eigenvectors... done.
+--pca: Eigenvectors written to results/chr22_pca.eigenvec , and eigenvalues
+written to results/chr22_pca.eigenval .
+
+End time: Wed Jun 17 21:45:41 2026
