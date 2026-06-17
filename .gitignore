@@ -3,3 +3,9 @@ data/raw/
 *.vcf
 *.vcf.gz
 *.tbi
+results/*.pgen
+results/*.pvar
+results/*.psam
+results/*.bed
+results/*.bim
+results/*.fam
