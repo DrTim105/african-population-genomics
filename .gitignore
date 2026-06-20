@@ -9,3 +9,6 @@ results/*.psam
 results/*.bed
 results/*.bim
 results/*.fam
+results/admixture/*.Q
+results/admixture/*.P
+results/admixture/log_K*.out
