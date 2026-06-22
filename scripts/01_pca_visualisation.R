@@ -64,8 +64,7 @@ cat("Rows with no superpopulation match:", sum(is.na(pca_data$super_pop)), "\n")
 # samples (3,202 total in this VCF release) absent from the original
 # 2,504-sample Phase 3 panel. They're also close relatives (parents/
 # children) of samples already in the cohort, which violates the
-# "unrelated individuals" assumption PCA relies on - so dropping them
-# is the statistically correct choice here, not just a labelling fix.
+# "unrelated individuals" assumption PCA relies on so we drop them.
 pca_data <- pca_data %>%
   filter(!is.na(super_pop))
 
@@ -106,6 +105,41 @@ ggsave(
 )
 
 print(p_pca)
+
+# Build a second PCA plot, coloured by individual population instead
+# of superpopulation ----
+n_pops <- n_distinct(pca_data$pop)
+
+# RColorBrewer's largest qualitative palette ("Paired") only has 12
+# colours; colorRampPalette() builds a new function that interpolates
+# extra in-between colours to stretch it to however many we need
+pop_palette <- colorRampPalette(RColorBrewer::brewer.pal(12, "Paired"))(n_pops)
+
+p_pca_pop <- ggplot(pca_data, aes(x = PC1, y = PC2, color = pop)) +
+  geom_point(size = 1.8, alpha = 0.7) +
+  scale_color_manual(values = pop_palette, name = "Population") +
+  labs(
+    title = "Population Structure: 1000 Genomes Chromosome 22",
+    subtitle = sprintf("PCA by individual population (%d populations, %s individuals)",
+                       n_pops, format(nrow(pca_data), big.mark = ",")),
+    x = sprintf("PC1 (%.1f%% variance)", pve$variance_explained[1]),
+    y = sprintf("PC2 (%.1f%% variance)", pve$variance_explained[2]),
+    caption = "Data: 1000 Genomes Project Phase 3"
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.text = element_text(size = 7),
+    legend.key.size = unit(0.4, "cm")
+  ) +
+  guides(color = guide_legend(ncol = 2, override.aes = list(size = 3)))
+
+ggsave(
+  file.path(BASE_DIR, "results/figures/pca_plot_by_population.png"),
+  p_pca_pop, width = 11, height = 7, dpi = 300
+)
+
+print(p_pca_pop)
 
 dim(pca_data)
 head(pca_data)
