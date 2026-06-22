@@ -80,3 +80,31 @@ ggsave(
 )
 
 print(p_adm)
+
+
+cv_errors <- data.frame(
+  K     = 2:6,
+  error = c(0.49710, 0.47744, 0.47178, 0.46659, 0.46576)
+)
+
+p_cv <- ggplot(cv_errors, aes(x = K, y = error)) +
+  geom_line(color = "#1A3A5C", linewidth = 1) +
+  geom_point(size = 4, color = "#1A3A5C") +
+  geom_point(data = filter(cv_errors, K == 5),
+             size = 5, color = "#D4600A") +
+  scale_x_continuous(breaks = 2:6) +
+  labs(
+    title    = "ADMIXTURE cross-validation error by K",
+    subtitle = "Orange point = selected K=5 (elbow: K5→K6 drop is 6x smaller than K4→K5)",
+    x        = "K (number of ancestral populations)",
+    y        = "Cross-validation error",
+    caption  = "CV errors from ADMIXTURE --cv flag; lower = better fit"
+  ) +
+  theme_classic(base_size = 14) +
+  theme(plot.title = element_text(face = "bold"))
+
+ggsave(
+  file.path(BASE_DIR, "results/figures/admixture_cv_error.png"),
+  p_cv, width = 7, height = 5, dpi = 300
+)
+print(p_cv)
