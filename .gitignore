@@ -1,14 +1,54 @@
+# =============================================================================
+# .gitignore — 01-african-genomics
+#
+# Rule: ignore large/regenerable binary files; track everything else
+# (scripts, figures, small results, metadata, ADMIXTURE Q outputs).
+# Download instructions for large data files: data/raw/README.md
+# =============================================================================
+
+# macOS system files
 .DS_Store
-data/raw/
-*.vcf
-*.vcf.gz
-*.tbi
+
+# R auto-generated workspace files (user-specific, not reproducible)
+.RData
+.Rhistory
+.Rproj.user/
+
+# ── Large genomic input data ──────────────────────────────────────────────────
+# These are too large for git (VCF is ~2GB). Download from 1000 Genomes FTP.
+# See data/raw/README.md for exact URLs.
+data/raw/*.vcf.gz
+data/raw/*.tbi
+data/raw/*.vcf
+data/raw/*.bcf
+
+# Small metadata files in data/raw ARE tracked:
+#   integrated_call_samples_v3.20130502.ALL.panel  (population labels)
+#   igsr_populations.tsv                            (sampling coordinates)
+
+# ── PLINK2 binary genotype files ─────────────────────────────────────────────
+# Large binary formats, regenerable by rerunning QC step from VCF
 results/*.pgen
-results/*.pvar
 results/*.psam
+results/*.pvar
 results/*.bed
 results/*.bim
 results/*.fam
-results/admixture/*.Q
+
+# PLINK2 pruning lists (regenerable)
+results/*.prune.in
+results/*.prune.out
+
+# PLINK2 log files (auto-generated per run, not part of analysis)
+results/*.log
+results/admixture/*.log
+results/chr22_pca*.log
+results/chr22_fst*.log
+results/chr22_qc*.log
+
+# ── ADMIXTURE ─────────────────────────────────────────────────────────────────
+# .P files = per-variant allele frequency matrices, very large, regenerable
 results/admixture/*.P
-results/admixture/log_K*.out
+
+# .Q files (ancestry proportions) and log_K*.out (CV errors) ARE tracked —
+# they are the actual results used in figures and the README
