@@ -1,0 +1,24 @@
+PLINK v2.0.0-a.6.9 64-bit (29 Jan 2025)
+Options in effect:
+  --fst super_pop method=wc report-variants
+  --out results/chr22_fst
+  --pfile results/chr22_pruned
+  --pheno results/fst_covariate.txt
+
+Hostname: Timothys-MacBook-Pro.local
+Working directory: /Users/tim/bioinformatics-portfolio/01-african-genomics
+Start time: Sat Jun 20 11:49:29 2026
+
+Random number seed: 1781952569
+8192 MiB RAM detected; reserving 4096 MiB for main workspace.
+Using up to 8 compute threads.
+3202 samples (0 females, 0 males, 3202 ambiguous; 3202 founders) loaded from
+results/chr22_pruned.psam.
+5141 variants loaded from results/chr22_pruned.pvar.
+1 categorical phenotype loaded (2504 values).
+--fst: Analyzing 2504 samples across 5 populations.
+Autosomal --fst: done.
+Autosomal --fst: 10 .fst.var files written.
+Autosomal --fst: Summary written to results/chr22_fst.fst.summary .
+
+End time: Sat Jun 20 11:49:29 2026
