@@ -4,6 +4,11 @@
 
 > A bioinformatics portfolio project analysing chromosome 22 from 2,504 unrelated individuals across 26 populations and 5 superpopulations, with a focus on within-Africa diversity and its clinical implications for drug metabolism.
 
+![License](https://img.shields.io/badge/License-Educational-blue)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
+![PLINK2](https://img.shields.io/badge/PLINK2-v2.0.0a.6.9-informational)
+![ADMIXTURE](https://img.shields.io/badge/ADMIXTURE-1.3.0-informational)
+![R](https://img.shields.io/badge/R-4.5.3-blue?logo=r&logoColor=white)
 ---
 
 ## Background
@@ -15,6 +20,16 @@ This project asks a simple question with clinical consequences: **how much popul
 The answer matters because genes like *CYP2D6* — responsible for metabolising roughly 25% of commonly prescribed drugs including codeine, tamoxifen, and many antipsychotics — carry population-specific alleles that directly affect whether a standard dose works, fails, or causes toxicity. The African-specific allele CYP2D6\*17, present in 20–34% of West and East Africans but rare elsewhere, reduces enzyme activity in ways that standard dosing algorithms do not account for.
 
 This project builds the evidence for that clinical gap using real genomic data, industry-standard tools, and rigorous statistical methods — then honestly identifies where the analysis pipeline's own design choices limit what it can conclude.
+
+---
+
+## Research Poster
+
+A conference-format A0 poster summarising all major findings:
+
+**[→ View Research Poster](https://drtim105.github.io/african-population-genomics/poster.html)**
+
+*Self-contained · All figures embedded · Print to PDF via browser (A0 Landscape)*
 
 ---
 
@@ -267,7 +282,7 @@ cd ../..
 
 ### 6. Run R scripts in order
 
-Open each script in RStudio or run via `Rscript`. Scripts 03, 04, and 06 require terminal PLINK2 commands documented in the script headers before the R visualisation code runs.
+Open each script in RStudio or run via `Rscript`. Some Scripts (03, 04, 06) may require running terminal PLINK2 commands midway through the script - these are available as comments in the scripts.
 
 ```bash
 Rscript scripts/01_pca_visualisation.R
