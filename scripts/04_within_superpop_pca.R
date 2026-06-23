@@ -46,6 +46,32 @@ cat("AFR samples:", sum(samples$super_pop == "AFR"), "\n")
 cat("EUR samples:", sum(samples$super_pop == "EUR"), "\n")
 
 
+# =============================================================================
+# STOP — RUN THESE THREE COMMANDS IN TERMINAL BEFORE CONTINUING
+# (run from project root: 01-african-genomics/)
+#
+# The R code above created three --keep files (keep_afr.txt, keep_eur.txt,
+# keep_afr_continental.txt). PLINK2 now runs PCA restricted to each subset.
+#
+# Within-AFR PCA (all 7 populations including ACB/ASW)
+# plink2 --pfile results/chr22_pruned \
+#   --keep results/keep_afr.txt \
+#   --pca 10 --out results/chr22_pca_afr
+#
+# Within-EUR PCA (5 European populations)
+# plink2 --pfile results/chr22_pruned \
+#   --keep results/keep_eur.txt \
+#   --pca 10 --out results/chr22_pca_eur
+#
+# Within-AFR PCA, continental only (ACB and ASW excluded)
+# plink2 --pfile results/chr22_pruned \
+#   --keep results/keep_afr_continental.txt \
+#   --pca 10 --out results/chr22_pca_afr_continental
+#
+# Expected outputs per run: .eigenvec and .eigenval files
+# =============================================================================
+
+
 # Within-AFR PCA ----
 eigenvec_afr <- read.table(
   file.path(BASE_DIR, "results/chr22_pca_afr.eigenvec"),

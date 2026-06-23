@@ -1,7 +1,32 @@
-# pca-visualisation.R =============================================
+# =============================================================================
+# scripts/01_pca_visualisation.R
 # Purpose: visualise PLINK2 PCA results for 1000 Genomes chr22,
 #          coloured by 1000 Genomes superpopulation label
-# ==================================================================
+# =============================================================================
+# TERMINAL PREREQUISITES — run these three commands once in bash from the
+# project root (01-african-genomics/) before running this script.
+# They only need to be run once; the output files persist.
+#
+# 1. QC filter + generate LD pruning list
+# plink2 \
+#   --vcf data/raw/1kGP_high_coverage_Illumina.chr22.filtered.SNV_INDEL_SV_phased_panel.vcf.gz \
+#   --maf 0.05 --geno 0.02 \
+#   --indep-pairwise 50 10 0.1 \
+#   --max-alleles 2 --snps-only \
+#   --out results/chr22_qc --make-pgen
+#
+# 2. Extract the LD-pruned variant set
+# plink2 --pfile results/chr22_qc \
+#   --extract results/chr22_qc.prune.in \
+#   --out results/chr22_pruned --make-pgen
+#
+# 3. Compute PCA (top 10 components)
+# plink2 --pfile results/chr22_pruned --pca 10 --out results/chr22_pca
+#
+# Outputs this script reads:
+#   results/chr22_pca.eigenvec   (sample coordinates on each PC)
+#   results/chr22_pca.eigenval   (variance explained per PC)
+# =============================================================================
 
 # Setup ----
 library(tidyverse)

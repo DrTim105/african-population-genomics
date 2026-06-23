@@ -31,6 +31,25 @@ write_tsv(fst_covar, file.path(BASE_DIR, "results/fst_covariate.txt"))
 
 cat("Wrote covariate file for", nrow(fst_covar), "samples\n")
 
+# =============================================================================
+# STOP — RUN THIS COMMAND IN TERMINAL BEFORE CONTINUING
+# (run from project root: 01-african-genomics/)
+#
+# The R code above created results/fst_covariate.txt.
+# PLINK2 now reads that file to compute Fst across all 10 superpopulation pairs.
+#
+# plink2 \
+#   --pfile results/chr22_pruned \
+#   --pheno results/fst_covariate.txt \
+#   --fst super_pop method=wc report-variants \
+#   --out results/chr22_fst
+#
+# Expected output: 10 files results/chr22_fst.{POP1}.{POP2}.fst.var
+#   (AFR.AMR, AFR.EAS, AFR.EUR, AFR.SAS, AMR.EAS, AMR.EUR,
+#    AMR.SAS, EAS.EUR, EAS.SAS, EUR.SAS)
+# Plus: results/chr22_fst.fst.summary and results/chr22_fst.log
+# =============================================================================
+
 
 # Read all 10 pairwise Fst files and average across pairs, as an
 # approximation of "overall differentiation" comparable to 1b's
@@ -43,7 +62,7 @@ fst_files <- list.files(
 
 fst_files  # sanity check - should list all 10
 
-fst_list <- map(fst_files, function(f) {
+fst_list <- purrr::map(fst_files, function(f) {
   read_tsv(f, show_col_types = FALSE) %>%
     mutate(comparison = basename(f))
 })

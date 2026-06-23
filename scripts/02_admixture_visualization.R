@@ -1,7 +1,30 @@
-# admixture-visualisation.R =======================================
+# =============================================================================
+# scripts/02_admixture_visualization.R
 # Purpose: visualise ADMIXTURE K=5 ancestry proportions for 1000
 #          Genomes chr22, faceted by superpopulation
-# ==================================================================
+# =============================================================================
+# TERMINAL PREREQUISITES — run these commands once in bash from the
+# project root (01-african-genomics/) before running this script.
+# Script 01's prerequisites (QC pipeline) must have been run first.
+#
+# 1. Convert pruned pgen to BED format (required by ADMIXTURE)
+# plink2 --pfile results/chr22_pruned \
+#   --out results/chr22_pruned --make-bed
+#
+# 2. Run ADMIXTURE for K=2 through K=6 (run from results/admixture/)
+# cd results/admixture
+# for K in 2 3 4 5 6; do
+#   admixture --cv ../chr22_pruned.bed $K | tee log_K${K}.out
+# done
+# cd ../..
+#
+# Outputs this script reads:
+#   results/admixture/chr22_pruned.{2-6}.Q   (ancestry proportions)
+#   results/admixture/log_K{2-6}.out          (CV error values)
+#   results/chr22_pruned.fam                  (sample ID order)
+# =============================================================================
+
+library(tidyverse)
 
 # Setup ----
 library(tidyverse)

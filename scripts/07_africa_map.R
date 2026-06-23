@@ -1,13 +1,24 @@
 # =============================================================================
 # scripts/07_africa_map.R
-#
 # Purpose : Geographic map of all 7 AFR-superpopulation sampling locations
 #           from 1000 Genomes Phase 3, coloured by mean Fst from YRI.
-#           First actual geographic map in either project 1 or 1b -
-#           both previously only showed abstract PCA space.
+# =============================================================================
+# TERMINAL PREREQUISITES — this script reads 21 within-Africa pairwise Fst
+# files created by script 06's PLINK2 command. Ensure the following have
+# both been completed before running this script:
 #
-# Inputs  : results/chr22_fst_within_afr.*.fst.var (from script 06)
-# Outputs : results/figures/africa_population_map.png
+# 1. Script 04 run completely (creates results/keep_afr.txt)
+# 2. Script 06 run to the write_tsv step, then terminal command:
+#
+# plink2 \
+#   --pfile results/chr22_pruned \
+#   --keep results/keep_afr.txt \
+#   --pheno results/fst_covariate_afr_pop.txt \
+#   --fst pop method=wc report-variants \
+#   --out results/chr22_fst_within_afr
+#
+# Output files this script reads:
+#   results/chr22_fst_within_afr.*.fst.var   (21 pairwise files)
 #
 # Dependencies: install.packages("maps") if not already installed
 # =============================================================================
@@ -27,7 +38,7 @@ BASE_DIR <- "/Users/tim/bioinformatics-portfolio/01-african-genomics"
 #
 # Note on ESN: IGSR coordinate (9.07N, 7.48E) falls in the Abuja/Niger
 # State area rather than the Esan homeland in Edo State. This is the
-# official published centroid - use it, but note it in documentation.
+# official published centroid.
 #
 # Note on ASW: "African Ancestry in SW USA" has no single sampling city.
 # IGSR publishes (35.483, -97.533) as its centroid - included here.

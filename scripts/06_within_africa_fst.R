@@ -1,4 +1,4 @@
-# scripts/07_within_africa_fst.R ======================================
+# scripts/06_within_africa_fst.R ======================================
 # Purpose: pairwise Fst between the 7 African 1000 Genomes populations
 #          specifically - completes the within-Africa trio
 #          (PCA + ADMIXTURE + Fst, all restricted to Africa)
@@ -22,6 +22,25 @@ fst_covar_pop <- samples %>%
 
 write_tsv(fst_covar_pop, file.path(BASE_DIR, "results/fst_covariate_afr_pop.txt"))
 
+# =============================================================================
+# STOP — RUN THIS COMMAND IN TERMINAL BEFORE CONTINUING
+# (run from project root: 01-african-genomics/)
+#
+# The R code above created results/fst_covariate_afr_pop.txt.
+# PLINK2 now computes all 21 pairwise Fst values among the 7 AFR populations.
+# Note: results/keep_afr.txt must already exist (created by script 04).
+#
+# plink2 \
+#   --pfile results/chr22_pruned \
+#   --keep results/keep_afr.txt \
+#   --pheno results/fst_covariate_afr_pop.txt \
+#   --fst pop method=wc report-variants \
+#   --out results/chr22_fst_within_afr
+#
+# Expected output: 21 files results/chr22_fst_within_afr.{POP1}.{POP2}.fst.var
+#   covering all combinations of ACB, ASW, ESN, GWD, LWK, MSL, YRI
+# Plus: results/chr22_fst_within_afr.fst.summary and .log
+# =============================================================================
 
 fst_files_afr <- list.files(
   file.path(BASE_DIR, "results"),
@@ -31,7 +50,7 @@ fst_files_afr <- list.files(
 
 length(fst_files_afr)  # should print 21
 
-fst_afr_summary <- map(fst_files_afr, function(f) {
+fst_afr_summary <- purrr::map(fst_files_afr, function(f) {
   read_tsv(f, show_col_types = FALSE) %>%
     mutate(comparison = basename(f))
 }) %>%
