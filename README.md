@@ -6,7 +6,7 @@
 
 ---
 
-## Motivation
+## Background
 
 Most genomic research — and most clinical dosing guidelines — are built on data from populations of European descent. African populations carry more genetic diversity than any other continental group (a direct consequence of humanity's origin in Africa), yet they remain systematically underrepresented in both research datasets and pharmacogenomic databases.
 
@@ -79,24 +79,6 @@ The 50kb window mean Fst (0.1353 vs genome-wide 0.0977) does not clear statistic
 ![CYP2D6 regional Fst](results/figures/cyp2d6_fst_region.png)
 
 ![Permutation test](results/figures/cyp2d6_permutation_test.png)
-
----
-
-## Populations
-
-All 7 populations in the 1000 Genomes AFR superpopulation are analysed. Population descriptors follow IGSR guidelines — the full descriptor (e.g. "Esan in Nigeria") is used rather than broad geographic labels.
-
-| Code | Full name | Location | Sampling context |
-|------|-----------|----------|-----------------|
-| YRI | Yoruba in Ibadan, Nigeria | Ibadan, Oyo State | Largest Nigerian ethnic group; original HapMap population |
-| ESN | Esan in Nigeria | Edo State region | Added in Phase 3 to increase within-Nigeria diversity |
-| GWD | Gambian in Western Division, The Gambia | Western Division | Mandinka ethnic group |
-| MSL | Mende in Sierra Leone | Bo, Sierra Leone | Mende ethnic group |
-| LWK | Luhya in Webuye, Kenya | Webuye, Western Kenya | Only East African population in the dataset |
-| ACB | African Caribbean in Barbados | Bridgetown, Barbados | Diaspora; documented European admixture |
-| ASW | African Ancestry in SW USA | Southwest USA (centroid) | Diaspora; documented European admixture |
-
-Coordinates sourced from the official IGSR population metadata file (`igsr_populations.tsv`), available at [internationalgenome.org](https://www.internationalgenome.org/data-portal/population).
 
 ---
 
@@ -315,15 +297,9 @@ Rscript scripts/02_admixture_visualization.R
 
 ---
 
-## Future Directions
-
-**Project 3 (planned): CYP2D6 pharmacogenomics with star-allele calling.** Extract the raw VCF (before QC) for the CYP2D6 region and use a purpose-built tool (Stargazer, StellarPGx, or Cyrius) to call star alleles (\*1, \*4, \*10, \*17) rather than individual SNPs. Compare star allele frequencies between AFR and EUR populations to directly quantify the metaboliser phenotype distribution gap. This would address the fundamental pipeline limitation identified in this project.
-
----
-
 ## Companion Project
 
-[**01b-genes-and-geography**](https://github.com/DrTim105/genes-and-geography) implements a parallel analysis of the same biological question using a from-scratch Python/scikit-learn pipeline (no PLINK2, no ADMIXTURE). Comparing the two projects demonstrates understanding of both industry-standard genomics tools (project 1) and the underlying algorithms (project 1b). Key differences:
+[**genes-and-geography**](https://github.com/DrTim105/genes-and-geography) implements a parallel analysis of the same biological question using a from-scratch Python/scikit-learn pipeline (no PLINK2, no ADMIXTURE). Comparing the two projects demonstrates understanding of both industry-standard genomics tools (project 1) and the underlying algorithms (project 1b). Key differences:
 
 | | Project 1 (this repo) | Project 1b |
 |---|---|---|
