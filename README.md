@@ -11,13 +11,11 @@
 ![R](https://img.shields.io/badge/R-4.5.3-blue?logo=r&logoColor=white)
 ---
 
+## Background
+
 > *No man is an island, entire of itself; every man is a piece of the continent, a part of the main.*
 >
 > — John Donne, Meditation XVII (1624)
-
----
-
-## Background
 
 Most genomic research — and most clinical dosing guidelines — are built on data from populations of European descent. African populations carry more genetic diversity than any other continental group (a direct consequence of humanity's origin in Africa), yet they remain systematically underrepresented in both research datasets and pharmacogenomic databases.
 
