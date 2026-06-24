@@ -1,3 +1,4 @@
 # Tell GitHub Linguist that ADMIXTURE .Q files are data, not code
 results/admixture/*.Q linguist-detectable=false
 results/admixture/*.P linguist-detectable=false
+poster.html linguist-documentation
